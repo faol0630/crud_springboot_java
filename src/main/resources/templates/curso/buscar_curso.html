@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://wwww.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Curso info</title>
+
+    <style>
+        body{
+            background-color: #515151;
+            font-family: system-ui;
+        }
+        h1{
+            color: #3489FA;
+        }
+        h4{
+            color: orange;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 60%;
+            border: 1px solid #ddd;
+            margin: 18px auto;
+
+        }
+
+        th, td {
+            text-align: left;
+            padding: 16px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #a2a2a2
+        }
+        tr:nth-child(odd) {
+        color: #CCCCCC;
+
+        }
+        h2 {
+            text-align: center;
+            color: #0098FD;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+        p {
+            color: #0098FD;
+            font-size: 30px;
+            text-align: center;
+        }
+        button{
+      background-color: #0098FD;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 15px 0px;
+    }
+    button:hover{
+      background-color: #0075C1;
+    }
+    button[name="agregar"] {
+        padding: 12px;
+        margin: 12px;
+    }
+    button[name="eliminar"]{
+        background-color: #AE1121;
+    }
+     a{
+        text-decoration:none;
+        color: white;
+    }
+    button[name="eliminar_todo"]{
+        background-color: #AE1121;
+        margin: 12px;
+        padding: 12px;
+    }
+
+    #buscar_por_nombre, #buscar_por_id{
+
+      width: 50%;
+      margin: 0 auto ;
+      padding: 5px 30px;
+      border-radius: 5px;
+    }
+    #buscar_por_nombre div, #buscar_por_id div{
+      margin-bottom: 15px;
+    }
+    #buscar_por_nombre label, #buscar_por_id label{
+      display: block;
+      text-transform: uppercase;
+      font-size: 14px;
+      color: #0098FD;
+      padding: 8px 1px;
+      margin: 10px 0px;
+    }
+    #buscar_por_nombre input, #buscar_por_id input{
+      background-color: #515151;
+      color: #CCCCCC;
+      font-size: 16px;
+      width: 100%;
+      height: 30px;
+      padding: 0 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    #buscar_por_nombre input:focus, #buscar_por_id input:focus{
+      border: 1px solid #0098FD;
+    }
+
+    #buscar{
+      display: block;
+      background: #0098FD;
+      height: 30px;
+      border: none;
+      border-radius: 3px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 10px;
+      margin 10px 0px;
+    }
+    #buscar_por_nombre button:hover, #buscar_por_id button:hover{
+      background: #0075C1;
+    }
+    #buscar_por_nombre .error, #buscar_por_id .error{
+      color: #f00;
+      font-size: 12px;
+    }
+    #buscar_por_nombre .success, #buscar_por_id .success{
+      color: green;
+      font-size: 12px;
+    }
+    #titulo{
+        width: 50%;
+        margin: 18px auto;
+    }
+    .th_1{
+        color: #CCCCCC;
+    }
+
+    @media (max-width: 800px) {
+
+        form{
+            width: 80%;
+        }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                border: 1px solid #ccc;
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+            }
+            td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+            td:nth-of-type(1):before { content: "Id"; }
+            td:nth-of-type(2):before { content: "Nombre"; }
+            td:nth-of-type(3):before { content: "Apellido"; }
+            td:nth-of-type(4):before { content: "Correo"; }
+            td:nth-of-type(5):before { content: "Nota"; }
+    }
+
+    </style>
+</head>
+<body>
+
+<div id="titulo">
+    <h1>Informacion del curso: </h1>
+
+    <button >
+        <a th:href="@{/lista_cursos}">Regresar</a>
+    </button>
+</div>
+
+<form id="buscar_por_nombre" th:action="@{/curso_nombre/{nombre}}" method="get" th:object="${curso}">
+
+    <div>
+        <label for="nombre">Buscar por nombre: </label>
+        <input id="nombre" type="text" name="nombre"  th:field="*{nombre}">
+    </div>
+
+    <div>
+        <button  name="buscar">Buscar por nombre</button>
+    </div>
+
+</form>
+
+<form id="buscar_por_id" th:action="@{/curso_id/{id_curso}}" method="get" th:object="${curso}">
+
+    <div>
+        <label for="id">Buscar por id: </label>
+        <input id="id" type="text" name="id"  th:field="*{id_curso}">
+    </div>
+
+    <div>
+        <button  name="buscar">Buscar por id</button>
+    </div>
+
+</form>
+
+<table>
+    <thead>
+    <th class="th_1">Id</th>
+    <th class="th_1">Nombre</th>
+    <th class="th_1">Duracion</th>
+    <th class="th_1">Editar</th>
+    <th class="th_1">Eliminar</th>
+    </thead>
+    <tbody>
+    <tr th:each="curso : ${cursos}">
+
+        <td th:text="${curso.id_curso}"></td>
+        <td th:text="${curso.nombre}"></td>
+        <td th:text="${curso.duracion}"></td>
+
+        <td>
+            <button>
+                <a th:href="@{/editar_curso/} + ${curso.id_curso}" th:text="Editar"></a>
+            </button>
+        </td>
+
+        <td>
+            <button name="eliminar">
+                <a onclick="eliminarCurso(this)" href="#" th:text="Eliminar" ></a>
+                <form th:action="@{/eliminar_curso/} + ${curso.id_curso}"></form>
+
+            </button>
+        </td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+<script>
+    function eliminarCurso(element){
+        var ok = confirm("Seguro de eliminar estudiante?")
+
+        if(ok){
+            element.nextElementSibling.submit();
+        }
+    }
+    </script>
+
+
+
+
+
+</body>
+</html>

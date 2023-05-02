@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeLeaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar / modificar direccion profesor</title>
+    <style>
+
+    body{
+        background-color: #515151;
+        font-family: system-ui;
+    }
+
+    button{
+      background-color: #0098FD;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    button:hover{
+      background-color: #0075C1;
+    }
+    a{
+        text-decoration:none;
+    }
+    form{
+
+      width: 50%;
+      margin: 0 auto;
+      padding: 30px;
+      border-radius: 5px;
+    }
+    form div{
+      margin-bottom: 15px;
+    }
+    form label{
+      display: block;
+      text-transform: uppercase;
+      font-size: 14px;
+      color: #0098FD;
+      padding: 8px;
+    }
+    form input{
+      background-color: #515151;
+      color: #CCCCCC;
+      font-size: 16px;
+      width: 100%;
+      height: 30px;
+      padding: 0 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    form input:focus{
+      border: 1px solid #0098FD;
+    }
+    #guardar{
+      display: block;
+      background: #0098FD;
+      height: 30px;
+      border: none;
+      border-radius: 3px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 8px;
+    }
+    form button:hover{
+      background: #0075C1;
+    }
+    form .error{
+      color: #f00;
+      font-size: 12px;
+    }
+    form .success{
+      color: green;
+      font-size: 12px;
+    }
+
+     #nombre_profesor{
+        display: flex;
+        justify-content: center;
+        color: #0098FD;
+
+    }
+    #nombre, #apellido{
+        padding: 0 5px;
+    }
+
+    #titulo{
+        width: 50%;
+        margin: 18px auto;
+        color: #CCCCCC;
+    }
+    .validacion1{
+        color: #CCC;
+        margin-top: 10px
+    }
+
+    </style>
+</head>
+<body>
+
+<div id="titulo">
+    <h1>Direccion profesor</h1>
+
+    <button >
+        <a th:href="@{/lista_profesores}">Lista profesores</a>
+    </button>
+</div>
+
+<div id="nombre_profesor">
+    <p>Nombre profesor: </p>
+    <p th:text=" *{direccion.profesor.nombre} " id="nombre"></p>
+    <p th:text=" *{direccion.profesor.apellido} " id="apellido"></p>
+</div>
+
+<form th:action="@{/guardar_direccion_profesor}" method="post" th:object="${direccion}">
+
+    <!--    este campo no se muestra en pantalla.evita ingresos repetidos -->
+    <input type="hidden" name="id" th:field="*{id}">
+
+    <input type="hidden" name="id_profesor" th:field="*{profesor.id}">
+
+    <div>
+        <label for="ciudad">Ciudad: </label>
+        <input id="ciudad" type="text" name="ciudad" th:field="*{ciudad}">
+        <div th:errors="*{ciudad}" class="validacion1"></div>  <!--validation-->
+    </div>
+
+    <div>
+        <label for="calle">Calle: </label>
+        <input id="calle" type="text" name="calle" th:field="*{calle}">
+        <div th:errors="*{calle}" class="validacion1"></div> <!--validation-->
+    </div>
+
+    <div>
+        <label for="numero">Numero: </label>
+        <input id="numero" type="text" name="numero" th:field="*{numero}">
+        <div th:errors="*{numero}" class="validacion1"></div> <!--validation-->
+    </div>
+
+    <div>
+        <label for="codigo_postal">Codigo postal: </label>
+        <input id="codigo_postal" type="text" name="codigo_postal" th:field="*{codigo_postal}">
+        <div th:errors="*{codigo_postal}" class="validacion1"></div> <!--validation-->
+    </div>
+
+    <div>
+        <button name="guardar">Agregar</button>
+    </div>
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeLeaf.org"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Sin cursos asignados</title>
+  <style>
+    body{
+      background-color: #515151;
+      text-align:center;
+      font-family: system-ui;
+    }
+    #no_curso{
+      color: #BBBBBB;
+      width: 80%;
+    }
+    #container_no_curso{
+      display: flex;
+      justify-content: center;
+    }
+    #agregar_cursos, #regresar{
+        width: 80%;
+        margin: 18px auto;
+    }
+    h3 {
+        color: #0098FD;
+        text-align: center;
+    }
+     a{
+        text-decoration:none;
+        color: white;
+    }
+    button{
+      background-color: #0098FD;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover{
+      background-color: #0075C1;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="regresar">
+  <button >
+    <a th:href="@{/lista_profesores}">Lista profesores</a>
+  </button>
+</div>
+
+<div id="container_no_curso">
+  <h3 id="no_curso">El profesor no tiene asignado ningun curso</h3>
+</div>
+
+
+<div id="agregar_cursos" >
+
+  <form th:action="@{/curso_profesor_intro}" method="get">
+    <input type="hidden" name="id_profesor" th:value="${profesor.id}" />
+    <button><a>Asignar curso a profesor</a></button>
+  </form>
+
+</div>
+
+</body>
+</html>

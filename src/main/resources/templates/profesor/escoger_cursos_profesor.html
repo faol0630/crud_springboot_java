@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cursos sin profesor asignado</title>
+    <style>
+
+    body{
+      background-color: #515151;
+      font-family: system-ui;
+    }
+    ul{
+        color: #AAAAAA;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 80%;
+        border: 1px solid #ddd;
+        margin: 0 auto;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 12px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #a2a2a2
+    }
+    h2 {
+        text-align: center;
+        color: #0098FD;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+    }
+    p {
+        color: #0098FD;
+        font-size: 18px;
+        text-align: center;
+    }
+     a{
+        text-decoration:none;
+        color: white;
+    }
+    #botones_superiores{
+        width: 80%;
+        margin: 18px auto;
+    }
+    .th_1{
+        color: #CCCCCC;
+    }
+    button{
+      background-color: #0098FD;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover{
+      background-color: #0075C1;
+    }
+
+    button[name="eliminar"]{
+        background-color: #AE1121;
+    }
+    button[name="buscar_curso"]{
+        padding: 12px;
+    }
+
+    button[name="profesores"]{
+        padding:12px;
+    }
+
+    @media (max-width: 870px) {
+
+        table, thead, tbody, th, td, tr {
+            display: block;
+            width: 100%;
+        }
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        tr {
+            border: 1px solid #ccc;
+        }
+        td {
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+        td:before {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+        td:nth-of-type(1):before { content: "Id"; }
+        td:nth-of-type(2):before { content: "Nombre"; }
+        td:nth-of-type(3):before { content: "Apellido"; }
+        td:nth-of-type(4):before { content: "Correo"; }
+        td:nth-of-type(5):before { content: "Nota"; }
+    }
+
+    </style>
+</head>
+<body>
+
+<h2>Cursos sin profesor asignado</h2>
+
+<div>
+    <div id="botones_superiores">
+
+        <button name="buscar_curso">
+            <a  th:href="@{/curso_buscar}">Buscar curso</a>
+        </button>
+
+        <button name="profesores">
+            <a th:href="@{/lista_profesores}">Profesores</a>
+        </button>
+    </div>
+
+    <div>
+        <p>Total de cursos:</p>
+        <p th:text="${totalCursos}"></p>
+    </div>
+
+</div>
+
+<table>
+    <thead>
+    <tr>
+
+        <th class="th_1">Id</th>
+        <th class="th_1">Nombre</th>
+        <th class="th_1">Horas</th>
+        <th class="th_1">Agregar curso</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="curso : ${cursos}" >
+        <td th:text="${curso.id_curso}" ></td>
+        <td th:text="${curso.nombre}" ></td>
+        <td th:text="${curso.duracion}" ></td>
+
+        <td>
+            <form th:action="@{/agregar_curso_profesor}" method="post">
+                <input type="hidden" name="id_curso" th:value="${curso.id_curso}" />
+                <input type="hidden" name="id_profesor" th:value="${profesor.id}" />
+                <button type="submit">Agregar curso</button>
+            </form>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+

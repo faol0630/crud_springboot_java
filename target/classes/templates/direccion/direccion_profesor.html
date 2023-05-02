@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Direccion profesor</title>
+    <style>
+
+    body{
+      background-color: #515151;
+      font-family: system-ui;
+    }
+    ul{
+        color: #AAAAAA;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 80%;
+        border: 1px solid #ddd;
+        margin: 0 auto;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 12px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #a2a2a2
+    }
+    tr:nth-child(odd) {
+        color: #CCCCCC;
+
+    }
+    h2 {
+        text-align: center;
+        color: #0098FD;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+    }
+    p {
+        color: #0098FD;
+        font-size: 18px;
+        text-align: center;
+    }
+     a{
+        text-decoration:none;
+        color: white;
+    }
+    button{
+      background-color: #0098FD;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover{
+      background-color: #0075C1;
+    }
+    button[name="agregar"] {
+        padding: 12px;
+        margin: 12px;
+    }
+    button[name="eliminar"]{
+        background-color: #AE1121;
+    }
+    button[name="buscar_estudiante"]{
+        margin: 12px;
+        padding: 12px;
+    }
+    button[name="eliminar_todo"]{
+        background-color: #AE1121;
+        margin: 12px;
+        padding: 12px;
+    }
+    #nombre_profesor{
+        display: flex;
+        justify-content: center;
+
+    }
+    #nombre, #apellido{
+        padding: 0 5px;
+    }
+    #editar_direccion, #ir_a_profesores{
+        width: 80%;
+        margin: 18px auto;
+    }
+    .th_1{
+        color: #CCCCCC;
+    }
+    @media (max-width: 870px) {
+
+        table, thead, tbody, th, td, tr {
+            display: block;
+            width: 100%;
+        }
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        tr {
+            border: 1px solid #ccc;
+        }
+        td {
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+        td:before {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+        td:nth-of-type(1):before { content: "Id"; }
+        td:nth-of-type(2):before { content: "Nombre"; }
+        td:nth-of-type(3):before { content: "Apellido"; }
+        td:nth-of-type(4):before { content: "Correo"; }
+        td:nth-of-type(5):before { content: "Nota"; }
+    }
+
+    </style>
+</head>
+<body>
+
+<h2>Direccion profesor</h2>
+
+<div>
+
+    <div id="ir_a_profesores">
+        <button id="profesores">
+            <a th:href="@{/lista_profesores}">Lista profesores</a>
+        </button>
+    </div>
+
+</div>
+
+<div id="nombre_profesor">
+    <p>Nombre profesor: </p>
+    <p th:text=" *{direccion.profesor.nombre} " id="nombre"></p>
+    <p th:text=" *{direccion.profesor.apellido} " id="apellido"></p>
+</div>
+
+<table>
+    <thead>
+    <tr>
+
+        <th class="th_1">Ciudad</th>
+        <th class="th_1">Calle</th>
+        <th class="th_1">Numero</th>
+        <th class="th_1">Codigo postal</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+
+        <td th:text="*{direccion.ciudad}"></td>
+        <td th:text="*{direccion.calle}"></td>
+        <td th:text="*{direccion.numero}"></td>
+        <td th:text="*{direccion.codigo_postal}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+<div id="editar_direccion" >
+    <button >
+        <a th:href="@{/direccion_intro_profesor/} + ${profesor.id}">Editar direccion</a>
+    </button>
+</div>
+
+
+<script>
+    function eliminarCurso(element){
+        var ok = confirm("Seguro de eliminar curso?")
+
+        if(ok){
+            element.nextElementSibling.submit();
+        }
+    }
+</script>
+
+
+</body>
+</html>
+

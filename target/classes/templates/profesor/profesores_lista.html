@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de profesores</title>
+    <style>
+
+    body{
+      background-color: #515151;
+      font-family: system-ui;
+    }
+    ul{
+        color: #AAAAAA;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 80%;
+        border: 1px solid #ddd;
+        margin: 0 auto;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 12px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #a2a2a2
+    }
+    tr:nth-child(odd) {
+        color: #CCCCCC;
+
+    }
+    h2 {
+        text-align: center;
+        color: #0098FD;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+    }
+    p {
+        color: #0098FD;
+        font-size: 18px;
+        text-align: center;
+    }
+     a{
+        text-decoration:none;
+        color: white;
+    }
+    #botones_superiores{
+        width: 80%;
+        margin: 18px auto;
+    }
+    button{
+      background-color: #0098FD;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover{
+      background-color: #0075C1;
+    }
+    button[name="agregar"] {
+        padding: 12px;
+        margin: 12px 12px 12px 0px;
+    }
+    button[name="eliminar"]{
+        background-color: #AE1121;
+    }
+    button[name="buscar_curso"]{
+        padding: 12px;
+    }
+    button[name="eliminar_todo"]{
+        background-color: #AE1121;
+        margin: 12px;
+        padding: 12px;
+    }
+    button[name="estudiantes"]{
+        padding:12px;
+        margin: 12px;
+    }
+    button[name="cursos"]{
+        padding:12px;
+    }
+    .th_1{
+        color: #CCCCCC;
+    }
+    @media (max-width: 870px) {
+
+        table, thead, tbody, th, td, tr {
+            display: block;
+            width: 100%;
+        }
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        tr {
+            border: 1px solid #ccc;
+        }
+        td {
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+        td:before {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+        td:nth-of-type(1):before { content: "Id"; }
+        td:nth-of-type(2):before { content: "Nombre"; }
+        td:nth-of-type(3):before { content: "Apellido"; }
+        td:nth-of-type(4):before { content: "Correo"; }
+        td:nth-of-type(5):before { content: "Nota"; }
+    }
+
+    </style>
+</head>
+<body>
+
+<h2>Profesores</h2>
+
+<div>
+    <div id="botones_superiores">
+        <button name="agregar">
+            <a th:href="@{/profesor_modificar}">Agregar profesor</a>
+        </button>
+
+        <button name="buscar_curso">
+            <a  th:href="@{/profesor_buscar}">Buscar profesor</a>
+        </button>
+
+        <button name="eliminar_todo">
+            <a onclick="eliminarProfesor(this)" href="#">Eliminar todo</a>
+            <form th:action="@{/eliminar_profesores}"></form>
+        </button>
+
+        <button name="cursos">
+            <a th:href="@{/lista_cursos}">Listado cursos</a>
+        </button>
+
+        <button name="estudiantes">
+            <a th:href="@{/lista_index}">Estudiantes</a>
+        </button>
+    </div>
+
+    <div>
+        <p>Total de profesores:</p>
+        <p th:text="${totalProfesores}"></p>
+    </div>
+
+</div>
+
+<table>
+    <thead>
+    <tr>
+
+        <th>
+            <button>
+                <a th:href="@{/profesor_id}">Id</a>
+            </button>
+        </th>
+        <th>
+            <button>
+                <a th:href="@{/profesor_nombre}">Nombre</a>
+            </button>
+        </th>
+        <th>
+            <button>
+                <a th:href="@{/profesor_apellido}">Apellido</a>
+            </button>
+        </th>
+
+        <th>
+            <button>
+                <a th:href="@{/profesor_correo}">Correo</a>
+            </button>
+        </th>
+
+        <th class="th_1">Direccion</th>
+        <th class="th_1">Editar</th>
+        <th class="th_1">Cursos</th>
+        <th class="th_1">Eliminar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="profesor : ${profesores}">
+        <td th:text="${profesor.id}" ></td>
+        <td th:text="${profesor.nombre}"></td>
+        <td th:text="${profesor.apellido}"></td>
+        <td th:text="${profesor.correo}"></td>
+
+        <td>
+            <button>
+                <a th:href="@{/direccion_profesor/} + ${profesor.id}">Direccion</a>
+            </button>
+        </td>
+
+        <td>
+            <button>
+                <a th:href="@{/editar_profesor/} + ${profesor.id}" th:text="Editar"></a>
+            </button>
+        </td>
+
+        <td>
+
+            <form th:action="@{/cursos_asignados_profesor}" method="get">
+                <input type="hidden" name="id_profesor" th:value="${profesor.id}" />
+                <button><a>Cursos</a></button>
+            </form>
+
+        </td>
+
+        <td>
+            <button name="eliminar">
+                <a onclick="eliminarProfesor(this)" href="#" th:text="Eliminar"></a>
+                <form th:action="@{/eliminar_profesor/} + ${profesor.id}"></form>
+
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+<script>
+    function eliminarProfesor(element){
+        var ok = confirm("Esta accion no se puede deshacer.Desea continuar?")
+
+        if(ok){
+            element.nextElementSibling.submit();
+        }
+    }
+</script>
+
+
+</body>
+</html>
+
