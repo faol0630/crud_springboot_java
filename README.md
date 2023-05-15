@@ -1,6 +1,6 @@
 
-![Java-logo-PNG1](https://github.com/faol0630/crud_springboot_java/assets/63832065/529fb751-016c-4c5d-9cfc-0abbc65622b5)
-![Training-spring-boot](https://github.com/faol0630/crud_springboot_java/assets/63832065/8f471d33-6032-4a40-bfb5-3a76c1e580f6)
+![Java-logo-PNG1](https://github.com/faol0630/crud_springboot_java/assets/63832065/f0c7ee0f-8690-4728-a1f8-8f55e0a70ce2)
+![spring-logo-horizontal](https://github.com/faol0630/crud_springboot_java/assets/63832065/4b0ee608-fc50-4105-b115-85dbab70fb15)
 ![MySQL-logo-PNG](https://github.com/faol0630/crud_springboot_java/assets/63832065/dcc7a40a-f1a1-4923-9ed4-6fe846f6533e)
 
 
