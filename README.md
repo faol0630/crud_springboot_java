@@ -1,4 +1,51 @@
 # crud_springboot_java
+
+Este repositorio contiene un proyecto de ejemplo que utiliza diversas tecnologías y conceptos en el desarrollo de una aplicación web.
+
+## Descripción
+La aplicación es un CRUD (Create, Read, Update, Delete) que gestiona entidades relacionadas utilizando Spring Boot, Hibernate, Thymeleaf y MySQL. La interfaz de usuario está desarrollada con HTML, CSS y JavaScript.
+
+## Tecnologías utilizadas
+#### MySQL: 
+base de datos relacional utilizada para almacenar los datos de la aplicación.
+#### Hibernate: 
+framework de mapeo objeto-relacional (ORM) que permite la integración entre el modelo de datos y la base de datos.
+#### Thymeleaf: 
+motor de plantillas utilizado para la generación de páginas web en el lado del servidor.
+#### JPA (Java Persistence API): 
+especificación de Java para el mapeo objeto-relacional.
+#### Tomcat: 
+servidor web utilizado para desplegar la aplicación.
+#### Spring Boot: 
+framework de desarrollo de aplicaciones Java que simplifica la configuración y el desarrollo.
+#### Java: 
+lenguaje de programación utilizado en el desarrollo del backend.
+#### HTML: 
+lenguaje de marcado utilizado para estructurar las páginas web.
+#### CSS: 
+lenguaje de estilos utilizado para diseñar el aspecto visual de las páginas web.
+#### JavaScript: 
+lenguaje de programación utilizado para agregar interactividad y dinamismo a las páginas web.
+
+## Funcionalidades
+La aplicación implementa las siguientes funcionalidades:
+
+Operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para las entidades del sistema.
+Relaciones entre entidades utilizando las anotaciones @OneToOne, @OneToMany y @ManyToMany de JPA.
+Despliegue en un servidor Tomcat utilizando Spring Boot.
+
+## Configuración
+Asegúrese de tener configurado correctamente el entorno de desarrollo con Java y las dependencias necesarias. 
+Además, configure la conexión a la base de datos MySQL en el archivo de configuración correspondiente.
+
+## Ejecución
+Para ejecutar la aplicación, siga estos pasos:
+
+Clone este repositorio.
+Compile y ejecute el proyecto utilizando su entorno de desarrollo preferido o utilizando herramientas de construcción como Maven o Gradle.
+Acceda a la aplicación a través de su navegador web utilizando la URL proporcionada por el servidor Tomcat.
+
+
 ![Screenshot 2023-05-02 at 21-49-50 Lista de estudiantes](https://user-images.githubusercontent.com/63832065/235773725-bf99e21f-e438-49bb-b473-2f2de766e109.png)
 ![Screenshot 2023-05-02 at 21-50-15 Lista de profesores](https://user-images.githubusercontent.com/63832065/235773748-c9a90537-49f2-438d-b582-df77b3d57c46.png)
 ![Screenshot 2023-05-02 at 21-50-32 Lista de cursos](https://user-images.githubusercontent.com/63832065/235773760-4f1399f9-c3ad-446e-909f-b279e0a2245e.png)
